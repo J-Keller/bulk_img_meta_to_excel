@@ -47,7 +47,14 @@ def get_image_meta_data(dir_path):
                 date = exif_dict['0th']['DateTime']
 
                 if not gps:
-                    raise ValueError('Missing GPS data')
+                    img_meta = {
+                        'name': filename,
+                        'date': date,
+                        'lat': '',
+                        'lng': '',
+                    }
+
+                    arr.append(img_meta)
                 else:
                     coords = gpsphoto.getGPSData(os.path.join(dir_path, filename))
 
